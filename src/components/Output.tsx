@@ -13,7 +13,7 @@ export default function Output({value,error}:Props) {
   return (
     <>
     <div className={` my-2 p-5 w-full bg-slate-800 border-2 text-white h-96 ${error ? 'border-red-500' :''}`}>
-        {value?.map(e=><h1>{e}</h1>)}
+        {value?.map(e=><p>{e}</p>)}
      </div>
     </>
   )
