@@ -1,0 +1,1 @@
+export const languages:string[] = ['java','javascript','python','C#','c++','PHP','typescript']
