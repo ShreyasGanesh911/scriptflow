@@ -1,5 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { languages } from '../Constants/Languages'
+import { ToastContainer } from 'react-toastify'
+import { toastError, toastSuccess } from '../Toast'
 type Output = {
     language: string,
     version : string,
@@ -21,8 +23,8 @@ export default function EditorHead({code,setError,setValue}:Props) {
         console.log(language)
         const body = {
           language : language,
-          //version : "18.15.0",
-          version : "3.10.0",
+          version : "18.15.0",
+          //version : "3.10.0",
           files :[
             {
               content :code
@@ -40,11 +42,21 @@ export default function EditorHead({code,setError,setValue}:Props) {
           })
           console.log(response.status)
         const data:Output = await response.json()
-        data.run.stderr ? setError(true) : setError(false)
+        setError(false)
         const repo = data.run.output.split('\n')
-        console.log(data.run.stderr)
+        
         setValue(repo)
+        if(data.run.stderr){
+            setError(true)
+            toastError("Error in code !")
+        }
+        else{
+            toastSuccess("Executed successfully")
+        }
+
+        
         }catch(e){
+            toastError("Oops, Internal Server Error")
           console.log(e)
         }
       }
@@ -56,6 +68,7 @@ export default function EditorHead({code,setError,setValue}:Props) {
               {languages.map(e=><option className='capitalize' selected = {e==='javascript'} value={e}>{e}</option>)}
             </select>
             </div> 
+            
     </>
   )
 }
