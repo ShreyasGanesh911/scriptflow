@@ -34,8 +34,8 @@ else
   }
  useEffect(()=>{ setColorFunction()},[])
   return (
-    <div className=' w-1/3 justify-start flex flex-col resize-x mx-1 border border-black'>
-        <p className={`uppercase ${language==='javascript' && 'capitalize'} h-10 text-xl text-center pb-1 flex justify-center items-center`}><span><i className={`fa-brands ${color} ${font} text-2xl pt-2 mx-2`}></i></span>{language}
+    <div className=' w-full h-1/3 justify-start flex flex-col  mb-2 border border-black'>
+        <p className={`uppercase ${language==='javascript' && 'capitalize'} h-8 text-xl text-center pb-1 flex justify-center items-center`}><span><i className={`fa-brands ${color} ${font} text-2xl pt-2 mx-2`}></i></span>{language}
           <button className='hover: hover:bg-slate-200' value={code} onClick={handleCopy}><i className="fa-regular fa-copy mx-5 "></i></button>
         </p>
         <CodeMirror
