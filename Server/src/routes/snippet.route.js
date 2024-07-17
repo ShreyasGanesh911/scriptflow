@@ -4,7 +4,7 @@ import { deleteProject,addProject,getAllProjects,updateProject,userprojects } fr
 const snippetRouter = express.Router()
 
 snippetRouter.post('/add',checkUser,addProject)
-snippetRouter.delete('/remove',checkUser,deleteProject)
+snippetRouter.post('/remove',checkUser,deleteProject)
 snippetRouter.put("/update",checkUser,updateProject)
 snippetRouter.get("/userprojects",checkUser,userprojects)
 snippetRouter.get("/allprojects",getAllProjects)
