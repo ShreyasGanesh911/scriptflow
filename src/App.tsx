@@ -5,6 +5,7 @@ import PlayGround from "./Pages/Playground";
 import Navbar from "./Global/Navbar";
 import Snippet from "./Pages/Snippet";
 import Login from "./Pages/Login";
+import Account from "./Pages/Account";
 
 function App() {
   return (
@@ -15,9 +16,11 @@ function App() {
 
           <Route element={<Home/>} path="/"></Route>
           <Route element={<PlayGround/>} path="/playground"></Route>
+          <Route element={<PlayGround/>} path="/playground/:id"></Route>
           <Route element={<EditorPage/>} path="/editor"></Route>
           <Route element={<Snippet/>} path="/snippet/:id"></Route>
           <Route element={<Login/>} path="/login"></Route>
+          <Route element={<Account/>} path="/account"></Route>
         </Routes>
       </BrowserRouter>
       </>
