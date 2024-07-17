@@ -5,10 +5,17 @@ import ErrorHandler from "../utils/ErrorHandler.js";
 const success = true
 
 export const addProject = AsyncHandler(async(req,res,next)=>{
-        const {projectName,html,css,js,publicView} = req.body
+        const {projectName,html,css,js,publicView,projectId} = req.body
         const {id} = req.user
-        const result = await project.create({projectName,html,css,js,publicView,user:id})
+        if(!projectId){
+            const result = await project.create({projectName,html,css,js,publicView,user:id})
         res.status(200).json({success,result})
+        }
+        else{
+            const result = await project.findByIdAndUpdate({_id:projectId},{projectName,html,css,js,publicView,user:id})
+        res.status(200).json({success,result})
+        }
+        
 })
 
 export const updateProject = AsyncHandler(async(req,res,next)=>{
@@ -39,7 +46,7 @@ export const getSingleProject = AsyncHandler(async(req,res,next)=>{
     const result = await project.findOne({_id:projectId})
     if(!result)
         return next(new ErrorHandler(404,"Project not found"))
-    if(result.publicView)
+    
         return res.status(200).json({success,result})
 })
 export const deleteProject = AsyncHandler(async(req,res,next)=>{
@@ -48,4 +55,17 @@ export const deleteProject = AsyncHandler(async(req,res,next)=>{
         return next(new ErrorHandler(400,"Project ID not provided"))
     const result = await project.deleteOne({_id:projectId})
     res.status(200).json({success,result})
+})
+
+export const checkIfOwner = AsyncHandler(async(req,res,next)=>{
+    const {projectId} = req.query
+    const {id} = req.user
+    if(!projectId)
+        return next(new ErrorHandler(400,"Project Id not mentioned"))
+    const result = await project.findOne({_id:projectId})
+   
+    if(!result)
+        return next(new ErrorHandler(404,"Project not found"))
+    if(result.user.toString() === id)
+        return res.status(200).json({success})
 })

@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+
 import CardDropDown from './CardDropDown'
 type Props = {
     title:string,
     html:string,
     css:string,
     js:string,
-    admin:boolean
+    admin:boolean,
+    id:string
 }
-export default function ProjectCard({title,html,css,js,admin}:Props) {
+export default function ProjectCard({title,html,css,js,admin,id}:Props) {
   const srcDoc = `
           <html>
           <body>${html}</body>  
@@ -15,7 +16,7 @@ export default function ProjectCard({title,html,css,js,admin}:Props) {
            <script>${js}</script>
           </html>
       `
-      const [show,setShow] = useState(false)
+      
   return (
     <>
         <div className="border m-3 w-72 h-72">
@@ -25,7 +26,7 @@ export default function ProjectCard({title,html,css,js,admin}:Props) {
           <div className="h-1/6 w-full flex">
           <p className="w-3/4 h-full flex items-center truncate">{title}</p>
           {
-            admin ?<CardDropDown/>:<p className="w-1/4 h-full text-center border">Like</p>
+            admin ?<CardDropDown type='project' id={id}/>:<p className="w-1/4 h-full text-center border">Like</p>
           }
           </div>
           </div> 

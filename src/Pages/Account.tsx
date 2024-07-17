@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ProjectCard from '../components/ProjectCard'
 import axios from 'axios'
 import { Project, Snippet } from "../Types/project"
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import CardDropDown from '../components/CardDropDown'
 export default function Account() {
   const navigate = useNavigate()
@@ -33,7 +33,7 @@ export default function Account() {
 
 
         <div className='w-full grid lg:grid-cols-3 2xl:grid-cols-4'>
-        { !show && projects?.map(e=><ProjectCard css={e.css} html={e.html} js={e.js} title={e.projectName} key={e._id} admin={true}/>)}
+        { !show && projects?.map(e=><NavLink to={`/playground/${e._id}`}><ProjectCard id={e._id} css={e.css} html={e.html} js={e.js} title={e.projectName} key={e._id} admin={true}/></NavLink>)}
         {show && snippets?.map((e)=><div className='border w-96 h-32 rounded'>
               <p className='w-full  h-1/2 text-2xl flex items-center pl-2 truncate'>{e.projectName}</p>   
               <div className='h-1/2  w-full  flex'>
@@ -41,7 +41,7 @@ export default function Account() {
                   <p className='h-1/2 px-2'><span className='text-sm'>Language:</span> {e.language}</p>
                   <p className='h-1/2 px-2'><span className='text-sm'>Version:</span> {e.version}</p>
                 </div>
-                <div className='w-1/4  h-full displayFlex'><CardDropDown/></div>
+                <div className='w-1/4  h-full displayFlex'><CardDropDown type='snippet' id={e._id}/></div>
               </div>     
         </div>)}
         </div>
