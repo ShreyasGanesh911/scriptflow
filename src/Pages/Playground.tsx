@@ -3,11 +3,18 @@ import Editor from '../components/Editor'
 import OutputConsole from '../components/OutputConsole'
 import { ToastContainer } from 'react-toastify'
 import axios from 'axios'
+import { toastError, toastSuccess } from '../Toast'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export default function PlayGround() {
+  const location = useLocation()
+  const navigate = useNavigate()
     const [html,setHtml] = useState('')
     const [css,setCss] = useState('')
     const [js,setJs] = useState('')
+    const [title,setTitle] = useState('')
+    const [warning,setWarning] = useState(false)
+    const [view,setView] = useState(false)
     const [srcDoc,setSrcDoc] = useState<string>('')
     useEffect(()=>{
       const timer = setTimeout(()=>{
@@ -22,27 +29,71 @@ export default function PlayGround() {
       },500)
     },[html,css,js])
     
+    const getData = async()=>{
+      //console.log(location.pathname.split('/')[2])
+      const id = location.pathname.split('/')[2] 
+      if(!id)
+        console.log("no id")
+      else{
+        axios.get(`http://localhost:4000/project/singleproject?projectId=${id}`).then((e)=>{
+          console.log(e.data.result)
+          setCss(e.data.result.css)
+          setHtml(e.data.result.html)
+          setJs(e.data.result.js)
+          setTitle(e.data.result.projectName)
+        }).catch(e=>{
+          navigate('/playground')
+        })
+      }
+    }
+    useEffect(()=>{
+        getData()
+    },[])
+
     const handleSave = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+      if(title===""){
+        setWarning(true)
+        setTimeout(()=>setWarning(false),3000)
+        return toastError("Playground title is required ")
+      }
+        
       const data = {
-        projectName:"Test1234", html,css,js,publicView:true
+        projectName:title, html,css,js,publicView:true
       }
       axios.post("http://localhost:4000/project/add",data,{withCredentials:true}).then((data)=>{
+          toastSuccess("Saved successfully")
           console.log(data)
       }).catch((e)=>{
-        console.log((e))
+        if(e.response.status!==500)
+          return toastError(e.response.data.message)
+        toastError("Internal server error")
+        console.log(e.response.message)
       })
     }
   return (
     <>
-        <section className='page flex' >
+        <section className='page relative overflow-y-hidden' >
+        <div className=' flex flex-row-reverse absolute top-0 right-0'>
+          <button className='py-1 px-2 border bg-green-400 rounded mr-3' onClick={handleSave}>save</button>
+          <select className='border outline-none mx-5 rounded p-1' onChange={()=>view?setView(false):setView(true)}>
+                <option selected value="Public">Public</option>
+                <option value="Private">Private</option>
+              </select>
+              <div className='w-full displayFlex'>
+                <input type="text" placeholder='Playground name' className={`w-5/6 outline-none rounded ${warning ? "border-red-500":""} border p-2`} 
+                  value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
+                </div>
+          </div>
+        <div className='w-full flex'>
           
-        <div className=' w-1/4   items-start justify-evenly border' >
+        <div className=' w-1/4 h-full  overflow-hidden items-start justify-evenly border' style={{height:'90vh'}}>
+
             <Editor language='html' font='fa-html5' setLanguage={setHtml} code={html}/> 
             <Editor language='css' setLanguage={setCss} font='fa-css3-alt' code={css}/>
             <Editor language='javascript' font='fa-square-js' setLanguage={setJs} code={js}/>
           </div> 
-          <button onClick={handleSave}>save</button>
-      <OutputConsole srcDoc={srcDoc}/>    
+        <OutputConsole srcDoc={srcDoc}/>
+        </div>
       <ToastContainer/>
         </section> 
     </>

@@ -17,7 +17,33 @@ greet("Hello world")
     console.log(a)
 }
 greet("Hello world")
-        `
+        `,
+        python:
+        `print("Hello World!")`,
+        php:
+        `<?php
+echo "Hello, World!";
+?>
+`,
+    csharp:
+    `using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello, World!");
+    }
+}
+`,
+dart:
+`void main() {
+  print('Hello, World!');
+}
+`,
+elixer:
+`IO.puts "Hello, World!"
+`
 }
 
 
