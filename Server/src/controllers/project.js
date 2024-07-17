@@ -1,4 +1,5 @@
 import project from "../models/project.models.js";
+import snippet from "../models/snippet.model.js";
 import AsyncHandler from "../utils/AsyncHandler.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
 const success = true
@@ -25,10 +26,22 @@ export const getAllProjects = AsyncHandler(async(req,res,next)=>{
 
 export const userprojects = AsyncHandler(async(req,res,next)=>{
     const {id} = req.user
-    const result = await project.find({user:id})
-    res.status(200).json({success,result})
+    const projects = await project.find({user:id})
+    const snippets = await snippet.find({user:id})
+    res.status(200).json({success,result:{projects,snippets}})
 })
 
+export const getSingleProject = AsyncHandler(async(req,res,next)=>{
+    const {projectId} = req.query
+    
+    if(!projectId)
+        return next(new ErrorHandler(400,"Project Id not mentioned"))
+    const result = await project.findOne({_id:projectId})
+    if(!result)
+        return next(new ErrorHandler(404,"Project not found"))
+    if(result.publicView)
+        return res.status(200).json({success,result})
+})
 export const deleteProject = AsyncHandler(async(req,res,next)=>{
     const {projectId} = req.body
     if(!projectId)
