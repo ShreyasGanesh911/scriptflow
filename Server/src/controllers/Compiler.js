@@ -45,3 +45,14 @@ export const deleteProject = AsyncHandler(async(req,res,next)=>{
     const result = await snippet.deleteOne({_id:projectId})
     res.status(200).json({success,result})
 })
+
+export const singleProject = AsyncHandler(async(req,res,next)=>{
+    const {projectId} = req.query
+    const {id} = req.user
+    if(!projectId)
+        return next(new ErrorHandler(400,"Project ID not provided"))
+    const result = await snippet.findOne({_id:projectId})
+    if(result.user.toString() === id)
+        return res.status(200).json({success,result})
+    next(new ErrorHandler(401,"Cannot access this project"))
+})
