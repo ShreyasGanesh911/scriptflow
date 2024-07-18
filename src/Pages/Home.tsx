@@ -17,8 +17,8 @@ export default function Home() {
     <>
      <section className="page flex flex-col items-center ">
 
-        <h1 className="w-3/4 xl:text-3xl lg:text-2xl p-3">Popular Playgrounds</h1>
-        <div className="w-3/4 grid 2xl:grid-cols-4 lg:grid-cols-3 border">
+        <h1 className="w-3/4 xl:text-3xl lg:text-2xl p-3 mt-2 font-mono">Popular Playgrounds</h1>
+        <div className="w-3/4 grid 2xl:grid-cols-4 lg:grid-cols-3 mt-5">
         {projects?.map(e=><Link to={`/playground/${e._id}`}><ProjectCard id={e._id} css={e.css} html={e.html} js={e.js} title={e.projectName} key={e._id} admin={false}/></Link>)}
         </div>
      </section>

@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Project, Snippet } from "../Types/project"
 import { NavLink, useNavigate } from 'react-router-dom'
 import CardDropDown from '../components/CardDropDown'
+import SnippetCard from '../components/SnippetCard'
 export default function Account() {
   const navigate = useNavigate()
   const [projects,setProjects] = useState<Project[]>()
@@ -34,17 +35,11 @@ export default function Account() {
 
         <div className='w-full grid lg:grid-cols-3 2xl:grid-cols-4'>
         { !show && projects?.map(e=><NavLink to={`/playground/${e._id}`}><ProjectCard id={e._id} css={e.css} html={e.html} js={e.js} title={e.projectName} key={e._id} admin={true}/></NavLink>)}
-        {show && snippets?.map((e)=><div className='border w-96 h-32 rounded'>
-              <p className='w-full  h-1/2 text-2xl flex items-center pl-2 truncate'>{e.projectName}</p>   
-              <div className='h-1/2  w-full  flex'>
-                <div className='w-3/4 h-full capitalize'>
-                  <p className='h-1/2 px-2'><span className='text-sm'>Language:</span> {e.language}</p>
-                  <p className='h-1/2 px-2'><span className='text-sm'>Version:</span> {e.version}</p>
-                </div>
-                <div className='w-1/4  h-full displayFlex'><CardDropDown type='snippet' id={e._id}/></div>
-              </div>     
-        </div>)}
         </div>
+        {show && <div className='border w-full grid lg:grid-cols-3 2xl:grid-cols-4'>
+        {snippets?.map((e)=><SnippetCard _id={e._id} language={e.language} projectName={e.projectName} version={e.version} key={e._id}/>)}
+        </div>}
+        
         </div>
     </section>
   )

@@ -5,10 +5,12 @@ import { ToastContainer } from 'react-toastify'
 import axios from 'axios'
 import { toastError, toastSuccess } from '../Toast'
 import { useLocation, useNavigate } from 'react-router-dom'
+import LoadingPlayground from '../components/LoadingPlayground'
 
 export default function PlayGround() {
   const location = useLocation()
   const navigate = useNavigate()
+    const [Loading,setLoading] = useState(true)
     const [html,setHtml] = useState('')
     const [css,setCss] = useState('')
     const [js,setJs] = useState('')
@@ -47,6 +49,7 @@ export default function PlayGround() {
           navigate('/playground')
         })
       }
+      setTimeout(()=>setLoading(false),1000)
     }
 
     const checkOwner = async()=>{
@@ -104,6 +107,8 @@ export default function PlayGround() {
   return (
     <>
         <section className='page relative overflow-y-hidden' >
+         {Loading?<LoadingPlayground/>:
+         <>
       {isOwner && <div className=' flex flex-row-reverse absolute top-0 right-0'>
           <button className='py-1 px-2 border bg-green-400 rounded mr-3' onClick={handleSave}>save</button>
           <select className='border outline-none mx-5 rounded p-1' onChange={handleSelect}>
@@ -125,6 +130,7 @@ export default function PlayGround() {
           </div> 
         <OutputConsole srcDoc={srcDoc}/>
         </div>
+        </>}
       <ToastContainer/>
         </section> 
     </>
