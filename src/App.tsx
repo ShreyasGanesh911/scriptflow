@@ -18,6 +18,7 @@ function App() {
           <Route element={<PlayGround key="new"/>}  path="/playground"></Route>
           <Route element={<PlayGround key="project"/>}  path="/playground/:id"></Route>
           <Route element={<EditorPage/>} path="/editor"></Route>
+          <Route element={<EditorPage/>} path="/editor/:id"></Route>
           <Route element={<Snippet/>} path="/snippet/:id"></Route>
           <Route element={<Login/>} path="/login"></Route>
           <Route element={<Account/>} path="/account"></Route>
