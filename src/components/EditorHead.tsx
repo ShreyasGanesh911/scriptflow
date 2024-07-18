@@ -42,13 +42,14 @@ export default function EditorHead({code,setError,setValue,setCode,language,setL
         e.preventDefault()
         const selected = JSON.parse(language)
         console.log(selected)
+        console.log(code)
         const body = {
           language : selected.lang,
           version : selected.version,
           
           files :[
             {
-              content :code
+              content :code?.toString()
             }
           ]
         }

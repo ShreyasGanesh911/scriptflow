@@ -4,18 +4,35 @@ import Output from '../components/Output';
 import EditorHead from '../components/EditorHead';
 import { ToastContainer } from 'react-toastify';
 import { languages } from '../Constants/Languages';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function EditorPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
   const [value,setValue] = useState<string[]>()
   const [code,setCode] = useState<string | undefined>(languages[1].snippet)
   const [error,setError] = useState<boolean>(false)
   const [language,setLanguage] = useState<string>(JSON.stringify(languages[1]))
-  
-  // useEffect(()=>{
-  //   window.onbeforeunload = (e)=>{
-  //       return ""
-  //   }
-  // })
+  const getData = async()=>{
+      const id = location.pathname.split('/')[2] || '669893be9c2742cb2538e8c0'
+      
+      if(!id)
+        console.log("No id found")
+      else{
+        axios.get(`http://localhost:4000/snippet/singleproject?projectId=${id}`,{withCredentials:true}).then((e)=>{
+          console.log(e.data.result)
+          const data = {language:e.data.result.language,version:e.data.result.version}
+          setLanguage(JSON.stringify(data))
+          setCode(e.data.result.content)
+        }).catch((e)=>{
+          navigate('/editor')
+          console.log(e)})
+      }
+  }
+  useEffect(()=>{
+      getData()
+  },[])
   return (
     <>
      <section className='page flex bg-black p-5'>
