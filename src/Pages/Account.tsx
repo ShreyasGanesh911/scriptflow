@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ProjectCard from '../components/ProjectCard'
 import axios from 'axios'
 import { Project, Snippet } from "../Types/project"
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import CardDropDown from '../components/CardDropDown'
 import SnippetCard from '../components/SnippetCard'
 export default function Account() {
@@ -37,7 +37,7 @@ export default function Account() {
         { !show && projects?.map(e=><NavLink to={`/playground/${e._id}`}><ProjectCard id={e._id} css={e.css} html={e.html} js={e.js} title={e.projectName} key={e._id} admin={true}/></NavLink>)}
         </div>
         {show && <div className='border w-full grid lg:grid-cols-3 2xl:grid-cols-4'>
-        {snippets?.map((e)=><SnippetCard _id={e._id} language={e.language} projectName={e.projectName} version={e.version} key={e._id}/>)}
+        {snippets?.map((e)=><Link to ={`/editor/${e._id}`}><SnippetCard _id={e._id} language={e.language} projectName={e.projectName} version={e.version} key={e._id}/></Link>)}
         </div>}
         
         </div>

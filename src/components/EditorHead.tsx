@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { languages } from '../Constants/Languages'
 import { ToastContainer } from 'react-toastify'
 import { toastError, toastSuccess } from '../Toast'
@@ -18,11 +18,13 @@ type Props = {
     setValue : Dispatch<SetStateAction<string[] | undefined>>
     setCode : Dispatch<SetStateAction<string | undefined>>
     setLanguage : Dispatch<SetStateAction<string>>
-    language:string
+    language:string,
 }
 export default function EditorHead({code,setError,setValue,setCode,language,setLanguage}:Props) {
      const [title,setTitle] = useState("")
      const [id,setId] = useState<null|string>()
+
+
     const handleSave = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
         e.preventDefault()
 
@@ -35,7 +37,13 @@ export default function EditorHead({code,setError,setValue,setCode,language,setL
           setId(e.data.result._id)
           console.log(e.data.result._id)
         }).catch((e)=>{
-          console.log(e)
+          if(e.response.status !== 500)
+            toastError("Need to login")
+          else{
+            toastError("internal server error")
+            console.log(e)
+          }
+          
         })
     }
     const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
@@ -91,6 +99,7 @@ export default function EditorHead({code,setError,setValue,setCode,language,setL
         console.log(selected)
         setCode(selected.snippet)
     }
+
   return (
     <>
             <div className='w-full flex bg-slate-900 flex-row-reverse px-5 py-2  m-1 justify-between '>
