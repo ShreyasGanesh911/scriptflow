@@ -33,7 +33,7 @@ export const createUser = AsyncHandler(async(req,res,next)=>{
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
-    await user.create({name,email,password:hash})
-
-    res.status(201).json({success,message:"User created!"})
+    const result =  await user.create({name,email,password:hash})
+    const token = jwt.sign({email,id:result._id},process.env.JWT_KEY)
+    res.status(201).cookie("Auth",token).json({success,message:"User created!"})
 })
