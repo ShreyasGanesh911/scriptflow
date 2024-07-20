@@ -12,7 +12,8 @@ export const languages:Obj[] = [ {lang:'java',version:'15.0.2',snippet:snippets[
     {lang:'php',version:"8.2.3",snippet:snippets['php']},
     {lang:'typescript',version:"1.32.3",snippet:snippets['typescript']},
     {lang:'dart',version:'2.19.6',snippet:snippets['dart']},
-    {lang:'elixir',version:'1.11.3',snippet:snippets['elixer']}
+    {lang:'elixir',version:'1.11.3',snippet:snippets['elixer']},
+    {lang:'coffeescript',version:'2.5.1',snippet:snippets['coffeescript']},
 
 
 

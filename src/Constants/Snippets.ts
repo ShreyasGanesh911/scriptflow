@@ -43,8 +43,11 @@ dart:
 `,
 elixer:
 `IO.puts "Hello, World!"
-`
+`,
+coffeescript:
+`console.log "hello world"`
 }
+
 
 
 
