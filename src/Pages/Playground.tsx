@@ -106,10 +106,10 @@ export default function PlayGround() {
     }
   return (
     <>
-        <section className='page relative overflow-y-hidden' >
+        <section className='page relative overflow-y-hidden bg-black text-white' >
          {Loading?<LoadingPlayground/>:
          <>
-      {isOwner && <div className=' flex flex-row-reverse absolute top-0 right-0'>
+      {isOwner && <div className=' flex flex-row-reverse absolute top-0 right-0 text-black'>
           <button className='py-1 px-2 border bg-green-400 rounded mr-3' onClick={handleSave}>save</button>
           <select className='border outline-none mx-5 rounded p-1' onChange={handleSelect}>
                 <option selected={currentView==="Public"} value="Public">Public</option>
@@ -122,7 +122,7 @@ export default function PlayGround() {
           </div>}
         <div className='w-full flex'>
           
-        <div className=' w-1/4 h-full  overflow-hidden items-start justify-evenly border' style={{height:'90vh'}}>
+        <div className=' 2xl:w-1/4 w-2/5 h-full  overflow-hidden items-start justify-evenly border' style={{height:'90vh'}}>
 
             <Editor language='html' font='fa-html5' setLanguage={setHtml} code={html}/> 
             <Editor language='css' setLanguage={setCss} font='fa-css3-alt' code={css}/>

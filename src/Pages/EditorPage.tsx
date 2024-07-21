@@ -17,7 +17,7 @@ export default function EditorPage() {
 
   return (
     <>
-     <section className='page flex bg-black p-5'>
+     <section className='page flex  p-5 bg-black text-white'>
         <Editor height="90vh" theme='vs-dark'  defaultLanguage='java' width="50vw" language={JSON.parse(language).lang}   value={code} onChange={(e)=>setCode(e)} />
         <div className='w-1/2 p-1'>
         

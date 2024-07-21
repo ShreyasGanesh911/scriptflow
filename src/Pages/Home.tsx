@@ -15,7 +15,7 @@ export default function Home() {
   },[])
   return (
     <>
-     <section className="page flex flex-col items-center ">
+     <section className="page flex flex-col items-center bg-black text-white ">
 
         <h1 className="w-3/4 xl:text-3xl lg:text-2xl p-3 mt-2 font-mono">Popular Playgrounds</h1>
         <div className="w-3/4 grid 2xl:grid-cols-4 lg:grid-cols-3 mt-5">

@@ -19,14 +19,14 @@ export default function ProjectCard({title,html,css,js,admin,id}:Props) {
       
   return (
     <>
-        <div className="border m-3 w-72 h-72">
-          <div className="w-full h-5/6 bg-red-50">
+        <div className=" rounded m-3 2xl:w-72 2xl:h-72 lg:h-64 lg:w-64">
+          <div className="w-full h-5/6  bg-white">
           <iframe className='border w-full h-full overflow-y-hidden '  scrolling='no' sandbox="allow-scripts" srcDoc={srcDoc} title='HTML CSS JS'/>
           </div>
-          <div className="h-1/6 w-full flex">
-          <p className="w-3/4 h-full flex items-center truncate">{title}</p>
+          <div className="h-1/6 w-full flex bg-black border border-slate-800 ">
+          <p className={`${admin ? "w-3/4": "w-11/12"} pl-2 h-full flex items-center truncate`}>{title}</p>
           {
-            admin ?<CardDropDown type='project' id={id}/>:<p className="w-1/4 h-full text-center border">Like</p>
+            admin ?<CardDropDown type='project' id={id}/>:<></>
           }
           </div>
           </div> 

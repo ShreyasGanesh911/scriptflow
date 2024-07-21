@@ -23,7 +23,7 @@ export default function Snippet() {
     
   return (
     <>
-        <section className='page flex' >
+        <section className='page flex text-black bg-white' >
         <div className=' w-1/4   items-start justify-evenly border' >
             <Editor language='html' font='fa-html5' setLanguage={setHtml} code={html}/> 
             <Editor language='css' setLanguage={setCss} font='fa-css3-alt' code={css}/>

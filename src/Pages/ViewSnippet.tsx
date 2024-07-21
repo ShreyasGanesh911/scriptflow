@@ -34,7 +34,7 @@ export default function ViewSnippet() {
           setValue(result?.value)
         }
         else{
-          toastSuccess("Error in code ")
+          toastError("Error in code ")
           setValue(result?.value)
         }
 
@@ -65,7 +65,7 @@ export default function ViewSnippet() {
     },[])
   return (
     <>
-     <section className="page flex bg-slate-900">
+     <section className="page flex bg-black">
      <Editor height="90vh" theme='vs-dark'  defaultLanguage='java' width="50vw" language={language}   value={code} onChange={(e)=>setCode(e)} />
      <div className='w-1/2 p-1'>
      <div className=' w-full flex px-5 justify-between items-center'>

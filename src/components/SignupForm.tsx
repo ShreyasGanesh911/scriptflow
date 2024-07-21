@@ -25,11 +25,11 @@ export default function SignupForm({setForm}:Props) {
 
   return (
     <>
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign up</h2>
+      <div className=" p-8 rounded-lg shadow-lg w-full max-w-sm bg-slate-900 text-black">
+        <h2 className="text-2xl font-bold mb-6 text-center text-indigo-500">Sign up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Name </label>
+            <label htmlFor="email" className=" text-indigo-500 block text-sm font-medium text-gray-700">Name </label>
             <input
               type="text"
               name="name"
@@ -39,7 +39,7 @@ export default function SignupForm({setForm}:Props) {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email </label>
+            <label htmlFor="email" className="text-indigo-500 block text-sm font-medium text-gray-700">Email </label>
             <input
               type="email"
               name="email"
@@ -49,7 +49,7 @@ export default function SignupForm({setForm}:Props) {
             />
           </div>
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="text-indigo-500 block text-sm font-medium text-gray-700">
               Password
             </label>
             <input
@@ -64,9 +64,9 @@ export default function SignupForm({setForm}:Props) {
             
             className="w-full px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Signup
+            Sign up
           </button>
-          <p className='w-full flex flex-row-reverse mt-1'><button className='text-indigo-800 underline' onClick={()=>setForm(true)}>Have an account ?</button></p>
+          <p className='w-full flex flex-row-reverse mt-1'><button className='text-indigo-500 underline' onClick={()=>setForm(true)}>Have an account ?</button></p>
         </form>
       </div> 
     </>
