@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
-
+import 'dotenv/config'
 const connectMongoDb = async()=>{
   try{
-      await mongoose.connect("mongodb://localhost:27017/scriptflow")
+      await mongoose.connect(process.env.MONGO_URI)
       console.log("connected to data base")
 
   }catch(e){
