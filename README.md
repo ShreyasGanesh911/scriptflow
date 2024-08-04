@@ -9,6 +9,7 @@ Script Flow is an online code editor.
 It is a user-friendly online web application that has been developed with React.
 
 ## About the app
+
 *  Home Page
   
 ![Home page](./src/Assets/Home.png)
@@ -28,3 +29,9 @@ It is a user-friendly online web application that has been developed with React.
 * Compilers
   
 ![Home page](./src/Assets/snippet.png)
+
+## Future improvements
+
+*   Add sockets for real-time editing.
+*   Auto saving to cloud
+*   Adding an AI module for code refactoring or debugging (Gemini / OpenAI API)
