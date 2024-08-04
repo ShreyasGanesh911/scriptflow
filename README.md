@@ -32,6 +32,7 @@ It is a user-friendly online web application that has been developed with React.
 
 ## Future improvements
 
-*   Add sockets for real-time editing.
+*   Adding sockets for real-time editing.
 *   Auto saving to cloud
 *   Adding an AI module for code refactoring or debugging (Gemini / OpenAI API)
+*   Dynamically place the available languages and their versions
